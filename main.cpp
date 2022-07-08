@@ -12,31 +12,28 @@ public:
         {
             if (i == '(' || i == '{' || i == '[')
             {
-                st.push(i);
-            }
-            else if (i == ')' && st.size() && st.top() == '(')
-            {
-                st.pop();
-            }
-            else if (i == '}' && st.size() && st.top() == '{')
-            {
-                st.pop();
-            }
-            else if (i == ']' && st.size() && st.top() == '[')
-            {
-                st.pop();
+                st.push(i + 2 + ((-1) * (i == 40)));
             }
             else
             {
+                if (st.size() && st.top() == i)
+                {
+                    st.pop();
+                    continue;
+                }
                 return false;
             }
         }
+
         return st.empty();
     }
 };
 
 int main()
 {
-    std::cout << "Hello world!" << std::endl;
+    Solution solution;
+
+    std::cout << "Is valid: " << (solution.isValid("({})[](()") ? "Yes" : "No") << std::endl;
+
     return 0;
 }
